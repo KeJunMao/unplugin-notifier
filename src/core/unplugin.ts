@@ -13,9 +13,7 @@ export const unpluginFactory: UnpluginFactory<UserOptions | undefined> = (
     enforce: 'pre',
     esbuild: {
       setup(build) {
-        build.onStart(() => {
-          ctx.bundler = 'esbuild'
-        })
+        ctx.bundler = 'esbuild'
         build.onEnd((result) => {
           const error = result.errors[0]
           ctx.error(error)

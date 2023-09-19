@@ -4,7 +4,8 @@
     "dev": "nodemon -w '../src/**/*.ts' -e .ts -x vite dev",
     "dev:webpack": "nodemon -w '../src/**/*.ts' -e .ts -x \"webpack --watch\"",
     "dev:rollup": "nodemon -w '../src/**/*.ts' -e .ts -x \"rollup --config rollup.config.mjs -w\"",
-    "dev:nuxt": "nuxt dev"
+    "dev:nuxt": "nodemon -w '../src/**/*.ts' -e .ts -x \"nuxt dev\"",
+    "dev:esbuild": "nodemon -w '../src/**/*.ts' -w main.ts -e .ts -x node esbuild.config.mjs"
   },
   "devDependencies": {
     "nuxt": "^3.7.3",
