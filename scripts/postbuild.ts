@@ -18,6 +18,9 @@ async function run() {
     code += 'exports.default = module.exports;'
     await fs.writeFile(file, code)
   }
+  /** @see https://github.com/egoist/tsup/issues/976 */
+  // eslint-disable-next-line n/prefer-global/process
+  process.stdin.resume()
 }
 
 run()
