@@ -1,13 +1,17 @@
 import { describe, it } from 'vitest'
 import { isCI } from 'std-env'
 import { Context } from '../src/core/context'
+import { BundlerList } from '../src/core/constant'
 
-describe('context', () => {
+describe('logo', () => {
   const ctx = new Context()
-  it('logo', () => {
-    if (!isCI) {
-      ctx.bundler = 'rspack'
-      ctx.error('logo test')
-    }
-  })
+  for (const bundler of BundlerList) {
+    it(bundler, () => {
+      if (!isCI) {
+        ctx.options.isNuxt = bundler.includes('nuxt:')
+        ctx.bundler = bundler
+        ctx.error('unplugin-notifier')
+      }
+    })
+  }
 })

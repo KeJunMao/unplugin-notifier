@@ -5,7 +5,7 @@ import type { UserOptions } from './types'
 import '@nuxt/schema'
 import { pluginName } from './core/constant'
 
-export interface ModuleOptions extends UserOptions {
+export interface ModuleOptions extends Omit<UserOptions, 'isNuxt'> {
 
 }
 
@@ -15,10 +15,10 @@ export default defineNuxtModule<ModuleOptions>({
     configKey: 'unpluginManifest',
   },
   defaults: {
-    icon: 'nuxt',
+
   },
   setup(options, _nuxt) {
-    addVitePlugin(() => vite(options))
-    addWebpackPlugin(() => webpack(options))
+    addVitePlugin(() => vite({ ...options, isNuxt: true }))
+    addWebpackPlugin(() => webpack({ ...options, isNuxt: true }))
   },
 })

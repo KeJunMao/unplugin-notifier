@@ -26,9 +26,9 @@ describe('context', () => {
     ctx.error('error')
     expect(nn.notify).toBeCalled()
   })
-  it('contentImage', () => {
+  it('nuxt icon', () => {
     const ctx = new Context({
-      icon: 'nuxt',
+      isNuxt: true,
     })
     expect(normalizePath(ctx.contentImage)).includes('assets/nuxt.png')
   })

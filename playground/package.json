@@ -3,9 +3,11 @@
   "scripts": {
     "dev": "nodemon -w '../src/**/*.ts' -e .ts -x vite dev",
     "dev:webpack": "nodemon -w '../src/**/*.ts' -e .ts -x \"webpack --watch\"",
-    "dev:rollup": "nodemon -w '../src/**/*.ts' -e .ts -x \"rollup --config rollup.config.mjs -w\""
+    "dev:rollup": "nodemon -w '../src/**/*.ts' -e .ts -x \"rollup --config rollup.config.mjs -w\"",
+    "dev:nuxt": "nuxt dev"
   },
   "devDependencies": {
+    "nuxt": "^3.7.3",
     "unplugin-notifier": "workspace:*",
     "vite": "^4.4.9",
     "vite-plugin-inspect": "^0.7.38",

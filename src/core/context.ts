@@ -5,26 +5,49 @@ import nn from 'node-notifier'
 import { isLinux, isTest, isWindows } from 'std-env'
 import type {
   BundlerName,
+  ErrorNotification,
+  ResolvedUserOptions,
   UserOptions,
 } from '../types'
 import { pluginName } from './constant'
 
-type ErrorNotification = string | {
-  message?: string
-  text?: string
+function resolveOptions(options: UserOptions = {}): ResolvedUserOptions {
+  return {
+    cwd: process.cwd(),
+    isNuxt: false,
+    ...options,
+  }
 }
 
 export class Context {
   cwd: string
-  bundler?: BundlerName
-  options: UserOptions
+  private _bundler: BundlerName = 'esbuild'
+
+  options: ResolvedUserOptions
   constructor(options: UserOptions = {}) {
     this.cwd = options.cwd ?? process.cwd()
-    this.options = options
+    this.options = resolveOptions(options)
+  }
+
+  public get bundler(): BundlerName {
+    return this._bundler
+  }
+
+  public set bundler(value: BundlerName) {
+    this._bundler = this.options.isNuxt ? `nuxt:${value.replace('nuxt:', '')}` as BundlerName : value
   }
 
   get title() {
-    return this.bundler ?? pluginName
+    const firstUpperCase = (str: string) => str.replace(/^(\w)(.*?)$/, (_, g1, g2) => `${g1.toUpperCase()}${g2}`)
+    let title = firstUpperCase(this.bundler)
+    if (this.bundler === 'esbuild')
+      title = 'esbuild'
+    if (this.options.isNuxt) {
+      const [nuxt, bundler] = title.split(':')
+      title = `${firstUpperCase(bundler)} Based ${nuxt}`
+    }
+
+    return title
   }
 
   get contentImage() {
@@ -45,7 +68,7 @@ export class Context {
       }
     }
 
-    const filename = this.options.icon ?? this.bundler?.toLowerCase() ?? 'logo'
+    const filename = (this.options.isNuxt ? 'nuxt' : this.bundler) ?? 'logo'
     const filepath = path.join(dirname, isTest ? `../../assets/${filename}.png` : `../assets/${filename}.png`)
 
     return filepath
