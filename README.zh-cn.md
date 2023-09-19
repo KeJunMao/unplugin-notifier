@@ -2,7 +2,7 @@
 
 # unplugin-notifier
 
-当打包器构建发生错误时发送原生通知，由
+当打包器构建发生错误时发送原生通知，由 [unplugin](https://github.com/KeJunMao/unplugin-compression) 和 [node-notifier](https://github.com/mikaelbr/node-notifier/) 强力驱动
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
