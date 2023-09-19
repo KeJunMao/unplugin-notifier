@@ -5,9 +5,11 @@
     "dev:webpack": "nodemon -w '../src/**/*.ts' -e .ts -x \"webpack --watch\"",
     "dev:rollup": "nodemon -w '../src/**/*.ts' -e .ts -x \"rollup --config rollup.config.mjs -w\"",
     "dev:nuxt": "nodemon -w '../src/**/*.ts' -e .ts -x \"nuxt dev\"",
-    "dev:esbuild": "nodemon -w '../src/**/*.ts' -w main.ts -e .ts -x node esbuild.config.mjs"
+    "dev:esbuild": "nodemon -w '../src/**/*.ts' -w main.ts -e .ts -x node esbuild.config.mjs",
+    "dev:rspack": "nodemon -w '../src/**/*.ts' -e .ts -x \"rspack --watch\""
   },
   "devDependencies": {
+    "@rspack/cli": "^0.3.4",
     "nuxt": "^3.7.3",
     "unplugin-notifier": "workspace:*",
     "vite": "^4.4.9",
