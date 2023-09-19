@@ -2,7 +2,8 @@
   "private": true,
   "scripts": {
     "dev": "nodemon -w '../src/**/*.ts' -e .ts -x vite dev",
-    "dev:webpack": "nodemon -w '../src/**/*.ts' -e .ts -x webpack"
+    "dev:webpack": "nodemon -w '../src/**/*.ts' -e .ts -x \"webpack --watch\"",
+    "dev:rollup": "nodemon -w '../src/**/*.ts' -e .ts -x \"rollup --config rollup.config.mjs -w\""
   },
   "devDependencies": {
     "unplugin-notifier": "workspace:*",
