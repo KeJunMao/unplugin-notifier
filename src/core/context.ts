@@ -2,7 +2,7 @@ import process from 'node:process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import nn from 'node-notifier'
-import { isLinux, isWindows } from 'std-env'
+import { isLinux, isTest, isWindows } from 'std-env'
 import type {
   BundlerName,
   UserOptions,
@@ -46,7 +46,7 @@ export class Context {
     }
 
     const filename = this.options.icon ?? this.bundler?.toLowerCase() ?? 'logo'
-    const filepath = path.join(dirname, `../assets/${filename}.svg`)
+    const filepath = path.join(dirname, isTest ? `../../assets/${filename}.png` : `../assets/${filename}.png`)
 
     return filepath
   }
