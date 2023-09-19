@@ -1,0 +1,13 @@
+{
+  "private": true,
+  "scripts": {
+    "dev": "nodemon -w '../src/**/*.ts' -e .ts -x vite dev",
+    "dev:webpack": "nodemon -w '../src/**/*.ts' -e .ts -x webpack"
+  },
+  "devDependencies": {
+    "unplugin-notifier": "workspace:*",
+    "vite": "^4.4.9",
+    "vite-plugin-inspect": "^0.7.38",
+    "webpack-cli": "^5.1.4"
+  }
+}

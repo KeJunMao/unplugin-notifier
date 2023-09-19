@@ -1,0 +1,138 @@
+<img src="assets/logo.svg" alt="logo" width="100" height="100" align="right" />
+
+# unplugin-notifier
+
+[![npm version][npm-version-src]][npm-version-href]
+[![npm downloads][npm-downloads-src]][npm-downloads-href]
+[![bundle][bundle-src]][bundle-href]
+[![License][license-src]][license-href]
+[![JSDocs][jsdocs-src]][jsdocs-href]
+
+English | [简体中文](./README.zh-cn.md)
+
+## Install
+
+```bash
+npm i unplugin-notifier
+```
+
+<details>
+<summary>Vite</summary><br>
+
+```ts
+// vite.config.ts
+import PreprocessorDirectives from 'unplugin-notifier/vite'
+
+export default defineConfig({
+  plugins: [
+    PreprocessorDirectives({ /* options */ }),
+  ],
+})
+```
+
+Example: [`playground/`](./playground/)
+
+<br></details>
+
+<details>
+<summary>Rollup</summary><br>
+
+```ts
+// rollup.config.js
+import PreprocessorDirectives from 'unplugin-notifier/rollup'
+
+export default {
+  plugins: [
+    PreprocessorDirectives({ /* options */ }),
+  ],
+}
+```
+
+<br></details>
+
+
+<details>
+<summary>Webpack</summary><br>
+
+```ts
+// webpack.config.js
+module.exports = {
+  /* ... */
+  plugins: [
+    require('unplugin-notifier/webpack')({ /* options */ })
+  ]
+}
+```
+
+<br></details>
+
+<details>
+<summary>Nuxt</summary><br>
+
+```ts
+// nuxt.config.js
+export default defineNuxtConfig({
+  modules: [
+    ['unplugin-notifier/nuxt', { /* options */ }],
+  ],
+})
+```
+
+> This module works for both Nuxt 2 and [Nuxt Vite](https://github.com/nuxt/vite)
+
+<br></details>
+
+<details>
+<summary>Vue CLI</summary><br>
+
+```ts
+// vue.config.js
+module.exports = {
+  configureWebpack: {
+    plugins: [
+      require('unplugin-notifier/webpack')({ /* options */ }),
+    ],
+  },
+}
+```
+
+<br></details>
+
+<details>
+<summary>esbuild</summary><br>
+
+```ts
+// esbuild.config.js
+import { build } from 'esbuild'
+import PreprocessorDirectives from 'unplugin-notifier/esbuild'
+
+build({
+  plugins: [PreprocessorDirectives()],
+})
+```
+
+<br></details>
+
+<details>
+<summary>Rspack (⚠️ experimental)</summary><br>
+
+```ts
+// rspack.config.js
+module.exports = {
+  plugins: [
+    require('unplugin-notifier/rspack')({ /* options */ }),
+  ],
+}
+```
+<br></details>
+
+[npm-version-src]: https://img.shields.io/npm/v/unplugin-notifier?style=flat&colorA=18181B&colorB=F0DB4F
+[npm-version-href]: https://npmjs.com/package/unplugin-notifier
+[npm-downloads-src]: https://img.shields.io/npm/dm/unplugin-notifier?style=flat&colorA=18181B&colorB=F0DB4F
+[npm-downloads-href]: https://npmjs.com/package/unplugin-notifier
+[bundle-src]: https://img.shields.io/bundlephobia/minzip/unplugin-notifier?style=flat&colorA=18181B&colorB=F0DB4F
+[bundle-href]: https://bundlephobia.com/result?p=unplugin-notifier
+[license-src]: https://img.shields.io/github/license/kejunmao/unplugin-notifier.svg?style=flat&colorA=18181B&colorB=F0DB4F
+[license-href]: https://github.com/kejunmao/unplugin-notifier/blob/main/LICENSE
+[jsdocs-src]: https://img.shields.io/badge/jsDocs.io-reference-18181B?style=flat&colorA=18181B&colorB=F0DB4F
+[jsdocs-href]: https://www.jsdocs.io/package/unplugin-notifier
