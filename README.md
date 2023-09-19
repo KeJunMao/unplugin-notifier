@@ -2,6 +2,8 @@
 
 # unplugin-notifier
 
+Send native notifications when an error occurs in a bundle build, Powered by [unplugin](https://github.com/KeJunMao/unplugin-compression) and [node-notifier](https://github.com/mikaelbr/node-notifier/).
+
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
 [![bundle][bundle-src]][bundle-href]
@@ -21,11 +23,11 @@ npm i unplugin-notifier
 
 ```ts
 // vite.config.ts
-import PreprocessorDirectives from 'unplugin-notifier/vite'
+import Notifier from 'unplugin-notifier/vite'
 
 export default defineConfig({
   plugins: [
-    PreprocessorDirectives({ /* options */ }),
+    Notifier({ /* options */ }),
   ],
 })
 ```
@@ -39,11 +41,11 @@ Example: [`playground/`](./playground/)
 
 ```ts
 // rollup.config.js
-import PreprocessorDirectives from 'unplugin-notifier/rollup'
+import Notifier from 'unplugin-notifier/rollup'
 
 export default {
   plugins: [
-    PreprocessorDirectives({ /* options */ }),
+    Notifier({ /* options */ }),
   ],
 }
 ```
@@ -104,10 +106,10 @@ module.exports = {
 ```ts
 // esbuild.config.js
 import { build } from 'esbuild'
-import PreprocessorDirectives from 'unplugin-notifier/esbuild'
+import Notifier from 'unplugin-notifier/esbuild'
 
 build({
-  plugins: [PreprocessorDirectives()],
+  plugins: [Notifier()],
 })
 ```
 

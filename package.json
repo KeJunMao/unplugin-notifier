@@ -131,6 +131,7 @@
   },
   "dependencies": {
     "node-notifier": "^10.0.1",
+    "std-env": "^3.4.3",
     "unplugin": "^1.5.0"
   },
   "devDependencies": {

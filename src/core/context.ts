@@ -2,6 +2,7 @@ import process from 'node:process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import nn from 'node-notifier'
+import { isLinux, isWindows } from 'std-env'
 import type {
   BundlerName,
   UserOptions,
@@ -26,7 +27,7 @@ export class Context {
     return this.bundler ?? pluginName
   }
 
-  get icon() {
+  get contentImage() {
     let dirname = ''
     try {
       if (__dirname)
@@ -52,17 +53,19 @@ export class Context {
           message: notification,
         }
       : notification
-    console.error()
+    const icon = isWindows || isLinux ? this.contentImage : undefined
     return nn.notify({
-      title: this.title,
-      appID: `${pluginName}:${this.bundler}`,
-      icon: this.icon,
+      // @ts-expect-error ignore
+      appID: `${pluginName}`,
+      icon,
+      contentImage: this.contentImage,
       ...options,
     }, callback)
   }
 
   error(message?: ErrorNotification) {
     this.notify({
+      title: `${this.title}`,
       message: typeof message === 'string' ? message : message?.message ?? message?.text,
     })
   }
