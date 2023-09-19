@@ -34,10 +34,15 @@ export class Context {
         dirname = __dirname
     }
     catch (_error) {
-      if (import.meta.url)
-        dirname = path.dirname(fileURLToPath('import.meta.url'))
-      else
+      try {
+        if (import.meta.url)
+          dirname = path.dirname(fileURLToPath(import.meta.url))
+        else
+          throw new Error('import.meta.url is undefined')
+      }
+      catch (error) {
         dirname = path.join(this.cwd, `node_modules/${pluginName}/dist`)
+      }
     }
 
     const filename = this.options.icon ?? this.bundler?.toLowerCase() ?? 'logo'
@@ -56,7 +61,7 @@ export class Context {
     const icon = isWindows || isLinux ? this.contentImage : undefined
     return nn.notify({
       // @ts-expect-error ignore
-      appID: `${pluginName}`,
+      appID: pluginName,
       icon,
       contentImage: this.contentImage,
       ...options,
