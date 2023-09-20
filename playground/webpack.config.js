@@ -1,4 +1,4 @@
-const Unplugin = require('unplugin-notifier/webpack').default
+const Unplugin = require('unplugin-notifier/webpack')
 
 /** @typedef {import('webpack').Configuration} WebpackConfig */
 /** @type {WebpackConfig} */

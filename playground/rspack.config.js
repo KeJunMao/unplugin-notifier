@@ -1,5 +1,5 @@
 const path = require('node:path')
-const Unplugin = require('unplugin-notifier/rspack').default
+const Unplugin = require('unplugin-notifier/rspack')
 
 /** @typedef {import('@rspack/core').Configuration} RspackConfig */
 /** @type {RspackConfig} */
