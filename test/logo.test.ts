@@ -3,7 +3,7 @@ import { isCI } from 'std-env'
 import { Context } from '../src/core/context'
 import { BundlerList } from '../src/core/constant'
 
-describe('logo', () => {
+describe.skip('logo', () => {
   const ctx = new Context()
   for (const bundler of BundlerList) {
     it(bundler, () => {

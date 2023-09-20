@@ -85,6 +85,10 @@ export class Context {
           message: notification,
         }
       : notification
+
+    if (typeof options?.message === 'string')
+      options.message = options.message.substring(0, 256)
+
     return nn.notify({
       appID: pluginName,
       icon: this.icon,
