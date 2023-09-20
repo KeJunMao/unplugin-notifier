@@ -30,6 +30,6 @@ describe('context', () => {
     const ctx = new Context({
       isNuxt: true,
     })
-    expect(normalizePath(ctx.contentImage)).includes('assets/nuxt.png')
+    expect(normalizePath(ctx.icon)).includes('assets/nuxt.png')
   })
 })

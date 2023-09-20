@@ -2,7 +2,7 @@ import process from 'node:process'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import nn from 'node-notifier'
-import { isLinux, isTest, isWindows } from 'std-env'
+import { isTest } from 'std-env'
 import type {
   BundlerName,
   ErrorNotification,
@@ -37,20 +37,7 @@ export class Context {
     this._bundler = this.options.isNuxt ? `nuxt:${value.replace('nuxt:', '')}` as BundlerName : value
   }
 
-  get title() {
-    const firstUpperCase = (str: string) => str.replace(/^(\w)(.*?)$/, (_, g1, g2) => `${g1.toUpperCase()}${g2}`)
-    let title = firstUpperCase(this.bundler)
-    if (this.bundler === 'esbuild')
-      title = 'esbuild'
-    if (this.options.isNuxt) {
-      const [nuxt, bundler] = title.split(':')
-      title = `${firstUpperCase(bundler)} Based ${nuxt}`
-    }
-
-    return title
-  }
-
-  get contentImage() {
+  get dirname() {
     let dirname = ''
     try {
       if (__dirname)
@@ -68,8 +55,25 @@ export class Context {
       }
     }
 
+    return dirname
+  }
+
+  get title() {
+    const firstUpperCase = (str: string) => str.replace(/^(\w)(.*?)$/, (_, g1, g2) => `${g1.toUpperCase()}${g2}`)
+    let title = firstUpperCase(this.bundler)
+    if (this.bundler === 'esbuild')
+      title = 'esbuild'
+    if (this.options.isNuxt) {
+      const [nuxt, bundler] = title.split(':')
+      title = `${firstUpperCase(bundler)} Based ${nuxt}`
+    }
+
+    return title
+  }
+
+  get icon() {
     const filename = (this.options.isNuxt ? 'nuxt' : this.bundler) ?? 'logo'
-    const filepath = path.join(dirname, isTest ? `../../assets/${filename}.png` : `../assets/${filename}.png`)
+    const filepath = path.join(this.dirname, isTest ? `../../assets/${filename}.png` : `../assets/${filename}.png`)
 
     return filepath
   }
@@ -81,12 +85,9 @@ export class Context {
           message: notification,
         }
       : notification
-    const icon = isWindows || isLinux ? this.contentImage : undefined
     return nn.notify({
-      // @ts-expect-error ignore
       appID: pluginName,
-      icon,
-      contentImage: this.contentImage,
+      icon: this.icon,
       ...options,
     }, callback)
   }

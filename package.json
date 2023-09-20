@@ -155,5 +155,10 @@
     "vite": "^4.4.9",
     "vitest": "^0.34.4",
     "webpack": "^5.88.2"
+  },
+  "pnpm": {
+    "patchedDependencies": {
+      "node-notifier@10.0.1": "patches/node-notifier@10.0.1.patch"
+    }
   }
 }
