@@ -1,4 +1,3 @@
-import { RollupError } from 'rollup'
 import type { StatsError } from 'webpack'
 import type { Message } from 'esbuild'
 import type { BundlerList } from './core/constant'
