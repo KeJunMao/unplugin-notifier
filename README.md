@@ -12,11 +12,36 @@ Send native notifications when an error occurs in a bundle build, Powered by [un
 
 English | [简体中文](./README.zh-cn.md)
 
+## Preview
+
+<details>
+<summary>Windows</summary><br>
+
+![Windows Preview](screenshot/windows.png)
+
+<br></details>
+
+<details>
+<summary>MacOS</summary><br>
+
+![MacOS Preview](screenshot/macos.png)
+
+<br></details>
+
+<details>
+<summary>Linux</summary><br>
+
+![Linux Preview](screenshot/linux.png)
+
+<br></details>
+
 ## Install
 
 ```bash
 npm i unplugin-notifier
 ```
+
+Check the `node-notifier` [requirements](https://github.com/mikaelbr/node-notifier#requirements) whether you need to install any additional tools for your OS.
 
 <details>
 <summary>Vite</summary><br>

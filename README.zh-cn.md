@@ -12,11 +12,36 @@
 
 [English](./README.md) | 简体中文
 
+## 预览
+
+<details>
+<summary>Windows</summary><br>
+
+![Windows Preview](screenshot/windows.png)
+
+<br></details>
+
+<details>
+<summary>MacOS</summary><br>
+
+![MacOS Preview](screenshot/macos.png)
+
+<br></details>
+
+<details>
+<summary>Linux</summary><br>
+
+![Linux Preview](screenshot/linux.png)
+
+<br></details>
+
 ## 安装
 
 ```bash
 npm i unplugin-notifier
 ```
+
+查看 `node-notifier` 的要求的[依赖](https://github.com/mikaelbr/node-notifier#requirements) ，以确定是否需要为系统安装额外的库。
 
 <details>
 <summary>Vite</summary><br>
