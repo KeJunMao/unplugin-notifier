@@ -85,7 +85,8 @@
   },
   "files": [
     "dist",
-    "assets"
+    "assets",
+    "apply-patch.mjs"
   ],
   "scripts": {
     "build": "tsup",
@@ -96,7 +97,8 @@
     "prepublishOnly": "npm run build",
     "release": "bumpp",
     "start": "esno src/index.ts",
-    "test": "vitest"
+    "test": "vitest",
+    "postinstall": "node apply-patch.mjs"
   },
   "peerDependencies": {
     "@nuxt/kit": "^3",
@@ -131,6 +133,7 @@
     }
   },
   "dependencies": {
+    "@pnpm/patching.apply-patch": "^2.0.5",
     "node-notifier": "^10.0.1",
     "std-env": "^3.4.3",
     "unplugin": "^1.5.0"
@@ -155,10 +158,5 @@
     "vite": "^4.4.9",
     "vitest": "^0.34.4",
     "webpack": "^5.88.2"
-  },
-  "pnpm": {
-    "patchedDependencies": {
-      "node-notifier@10.0.1": "patches/node-notifier@10.0.1.patch"
-    }
   }
 }
