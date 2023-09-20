@@ -78,6 +78,20 @@ export class Context {
     return filepath
   }
 
+  formatErrorMessage(error?: ErrorNotification) {
+    if (!error)
+      return
+    let message = ''
+    if (typeof error === 'string')
+      message = error
+    else if ('message' in error && error.message)
+      message = error.message
+    else if ('text' in error && error.text)
+      message = error.text
+
+    return message
+  }
+
   notify(...args: Parameters<typeof nn.notify>) {
     const [notification, callback] = args
     const options = typeof notification === 'string'
@@ -96,10 +110,10 @@ export class Context {
     }, callback)
   }
 
-  error(message?: ErrorNotification) {
+  error(error?: ErrorNotification) {
     this.notify({
       title: `${this.title}`,
-      message: typeof message === 'string' ? message : message?.message ?? message?.text,
+      message: this.formatErrorMessage(error),
     })
   }
 }

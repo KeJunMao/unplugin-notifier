@@ -6,6 +6,6 @@ import { Context } from '../src/core/context'
 describe('context', () => {
   it('very long message', () => {
     const ctx = new Context()
-    ctx.notify('A'.repeat(100000))
+    ctx.error('A'.repeat(100000))
   })
 })
