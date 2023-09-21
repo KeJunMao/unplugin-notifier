@@ -2,7 +2,7 @@
 
 # unplugin-notifier
 
-Send native notifications when an error occurs in a bundle build, Powered by [unplugin](https://github.com/KeJunMao/unplugin-compression) and [node-notifier](https://github.com/mikaelbr/node-notifier/).
+Send native notifications when an error occurs in a bundler build, Powered by [unplugin](https://github.com/KeJunMao/unplugin-compression) and [node-notifier](https://github.com/mikaelbr/node-notifier/).
 
 [![npm version][npm-version-src]][npm-version-href]
 [![npm downloads][npm-downloads-src]][npm-downloads-href]
