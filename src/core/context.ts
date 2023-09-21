@@ -1,6 +1,7 @@
 import process from 'node:process'
-import path from 'node:path'
+import path, { join } from 'node:path'
 import { fileURLToPath } from 'node:url'
+import { existsSync, readFileSync } from 'node:fs'
 import nn from 'node-notifier'
 import { isTest } from 'std-env'
 import type {
@@ -22,11 +23,41 @@ function resolveOptions(options: UserOptions = {}): ResolvedUserOptions {
 export class Context {
   cwd: string
   private _bundler: BundlerName = 'esbuild'
+  displayBundlerName: string
+  projectName?: string
 
   options: ResolvedUserOptions
   constructor(options: UserOptions = {}) {
     this.cwd = options.cwd ?? process.cwd()
     this.options = resolveOptions(options)
+
+    this.displayBundlerName = this.getDisplayBundlerName()
+    this.projectName = this.getProjectName()
+  }
+
+  getProjectName() {
+    const projectPackageJsonPath = join(this.cwd, 'package.json')
+    if (existsSync(projectPackageJsonPath)) {
+      const packageJson = readFileSync(projectPackageJsonPath, 'utf8')
+      try {
+        const packageJsonData = JSON.parse(packageJson)
+        return ((packageJsonData.displayName ?? packageJsonData.name) as string)
+      }
+      catch (_error) {}
+    }
+  }
+
+  getDisplayBundlerName() {
+    const firstUpperCase = (str: string) => str.replace(/^(\w)(.*?)$/, (_, g1, g2) => `${g1.toUpperCase()}${g2}`)
+    let name = firstUpperCase(this.bundler)
+    if (this.bundler === 'esbuild')
+      name = 'esbuild'
+    if (this.options.isNuxt) {
+      const [nuxt, bundler] = name.split(':')
+      name = `${firstUpperCase(bundler)} Based ${nuxt}`
+    }
+
+    return name
   }
 
   public get bundler(): BundlerName {
@@ -35,6 +66,7 @@ export class Context {
 
   public set bundler(value: BundlerName) {
     this._bundler = this.options.isNuxt ? `nuxt:${value.replace('nuxt:', '')}` as BundlerName : value
+    this.displayBundlerName = this.getDisplayBundlerName()
   }
 
   get dirname() {
@@ -59,20 +91,14 @@ export class Context {
   }
 
   get title() {
-    const firstUpperCase = (str: string) => str.replace(/^(\w)(.*?)$/, (_, g1, g2) => `${g1.toUpperCase()}${g2}`)
-    let title = firstUpperCase(this.bundler)
-    if (this.bundler === 'esbuild')
-      title = 'esbuild'
-    if (this.options.isNuxt) {
-      const [nuxt, bundler] = title.split(':')
-      title = `${firstUpperCase(bundler)} Based ${nuxt}`
-    }
+    if (this.projectName)
+      return this.projectName
 
-    return title
+    return this.displayBundlerName
   }
 
   get icon() {
-    const filename = (this.options.isNuxt ? 'nuxt' : this.bundler) ?? 'logo'
+    const filename = (this.options.isNuxt ? 'nuxt' : this.bundler)
     const filepath = path.join(this.dirname, isTest ? `../../assets/${filename}.png` : `../assets/${filename}.png`)
 
     return filepath
@@ -112,7 +138,7 @@ export class Context {
 
   error(error?: ErrorNotification) {
     this.notify({
-      title: `${this.title}`,
+      title: `${this.title} - Error`,
       message: this.formatErrorMessage(error),
     })
   }

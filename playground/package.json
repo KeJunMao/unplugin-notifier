@@ -1,4 +1,6 @@
 {
+  "name": "playground",
+  "displayName": "Playground",
   "private": true,
   "scripts": {
     "dev": "nodemon -w '../src/**/*.ts' -e .ts -x vite dev",
